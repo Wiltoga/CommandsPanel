@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,15 +24,64 @@ namespace CommandsPannel
     {
         public MainWindow()
         {
+            /*Process p = new Process();
+            ProcessStartInfo info = new ProcessStartInfo();
+            info.FileName = "vlc";
+            info.WorkingDirectory = "C:/Users/natha/Desktop";
+            info.Arguments = "meow.mp3 --play-and-exit";
+            p.StartInfo = info;
+            p.Start();*/
+
             InitializeComponent();
             Window_MouseLeave(null, null);
-            for (int i = 0; i < 10; i++)
-                icons.Children.Add(new Button { Content = "uijytrhgevfcds", Height = 100, Width = 100 });
+            App.LoadData();
+            WindowStartupLocation = WindowStartupLocation.Manual;
+            Top = App.Data.Top;
+            Left = App.Data.Left;
+            foreach (var item in App.Data.Buttons)
+            {
+                var current = new Button
+                {
+                    Width = 100,
+                    Height = 100
+                };
+                var grid = new Grid();
+                current.Tag = item;
+                current.Content = grid;
+                item.text = new TextBlock
+                {
+                    Text = item.name,
+                    TextAlignment = TextAlignment.Center,
+                    TextWrapping = TextWrapping.Wrap,
+                    VerticalAlignment = VerticalAlignment.Center
+                };
+                grid.Children.Add(item.text);
+                using var stream = new MemoryStream(item.source);
+                var bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.StreamSource = stream;
+                bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                bitmap.EndInit();
+                bitmap.Freeze();
+                item.image = new Image
+                {
+                    Source = bitmap
+                };
+                grid.Children.Add(item.image);
+                icons.Children.Insert(icons.Children.Count - 1, current);
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            App.SaveData();
             Close();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var dialog = new newButton();
+            dialog.ShowDialog();
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)

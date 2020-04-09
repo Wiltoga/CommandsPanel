@@ -1,0 +1,34 @@
+﻿<Window x:Class="CommandsPannel.newButton"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CommandsPannel"
+        mc:Ignorable="d"
+        Title="" Height="300" Width="300" MinHeight="300" MinWidth="300"
+        Background="#FF151515" WindowStartupLocation="CenterScreen" KeyDown="Window_KeyDown" PreviewKeyDown="Window_PreviewKeyDown">
+    <Grid>
+        <TextBlock Text="Dossier d'éxecution :" Margin="5, 125" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
+        <TextBox Margin="5,100" VerticalAlignment="Bottom" Height="20" />
+        <TextBlock Text="Commande :" Margin="5, 75" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
+        <TextBox Margin="5, 50" VerticalAlignment="Bottom" Height="20" />
+        <Button Content="Terminer" Padding="20, 10" Margin="5" VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="Button_Click" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="150" />
+            </Grid.RowDefinitions>
+            <Border BorderThickness="1" Margin="0,20,0,0" VerticalAlignment="Top" BorderBrush="#59FFFFFF" HorizontalAlignment="Center">
+                <Image VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="iconImage" AllowDrop="True" Source="/blank.png" Stretch="Uniform" Cursor="Hand" Drop="Image_Drop" DragEnter="Image_DragEnter" DragOver="Image_DragOver" MouseDown="iconImage_MouseDown" />
+            </Border>
+            <TextBlock Text="Icône :" Margin="5,0" VerticalAlignment="Top" />
+            <Button x:Name="removeIcon" VerticalAlignment="Top" HorizontalAlignment="Right" Content="retirer" Visibility="Hidden" Margin="5,0" Click="removeIcon_Click" />
+            <TextBlock Text="nom :" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5, 0,5,20" />
+            <TextBox Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="5, 20,5,0" />
+        </Grid>
+    </Grid>
+</Window>
