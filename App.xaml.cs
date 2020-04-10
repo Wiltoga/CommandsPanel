@@ -51,6 +51,21 @@ namespace CommandsPannel
             else
             {
                 Data = new Data { Buttons = new List<ActionButton>(), Left = Current.MainWindow.Left, Top = Current.MainWindow.Top };
+                Data.Buttons.Add(new ActionButton
+                {
+                    file = "steam://open/main",
+                    name = "Steam"
+                });
+                Data.Buttons.Add(new ActionButton
+                {
+                    file = "https://google.com",
+                    name = "Google"
+                });
+                Data.Buttons.Add(new ActionButton
+                {
+                    file = "Explorer",
+                    name = "explorer"
+                });
                 Directory.CreateDirectory(dir);
                 var formatter = new BinaryFormatter();
                 using var stream = new FileStream(path, FileMode.Create, FileAccess.Write);
