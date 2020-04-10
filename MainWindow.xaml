@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CommandsPannel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" ResizeMode="NoResize" Topmost="True" WindowStyle="None" Background="#FF151515" MouseLeave="Window_MouseLeave" MouseEnter="Window_MouseEnter" Icon="/icon.png" WindowStartupLocation="CenterScreen" ShowInTaskbar="False">
+        Title="Command Panel" Height="450" Width="800" ResizeMode="NoResize" Topmost="True" WindowStyle="None" Background="#FF151515" MouseLeave="Window_MouseLeave" MouseEnter="Window_MouseEnter" Icon="/icon.png" WindowStartupLocation="CenterScreen" ShowInTaskbar="False">
     <Grid>
         <Grid x:Name="pannel" Margin="20, 0, 0, 0">
             <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="30" Click="Button_Click" Template="{DynamicResource CloseWindowButton}" Margin="730,0,0,0">
