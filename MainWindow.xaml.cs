@@ -25,6 +25,7 @@ namespace CommandsPannel
         public MainWindow()
         {
             InitializeComponent();
+            App.Window = this;
             Window_MouseLeave(null, null);
             App.LoadData();
             WindowStartupLocation = WindowStartupLocation.Manual;
@@ -71,6 +72,26 @@ namespace CommandsPannel
             }
         }
 
+        public void ButtonEdition(object sender, RoutedEventArgs e)
+        {
+            var dialog = new newButton(sender as Button);
+            dialog.Show();
+        }
+
+        public void playAction(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            var act = button.Tag as ActionButton;
+            Process p = new Process();
+            ProcessStartInfo info = new ProcessStartInfo();
+            info.FileName = act.file;
+            info.WorkingDirectory = act.folder;
+            info.Arguments = act.args;
+            info.UseShellExecute = true;
+            p.StartInfo = info;
+            p.Start();
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             App.SaveData();
@@ -80,87 +101,7 @@ namespace CommandsPannel
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             var dialog = new newButton();
-            if (dialog.ShowDialog().Value)
-            {
-                var act = new ActionButton
-                {
-                    folder = dialog.folder.Text,
-                    file = dialog.file.Text,
-                    args = dialog.args.Text,
-                    name = dialog.actionName.Text,
-                    source = dialog.imageData
-                };
-                App.Data.Buttons.Add(act);
-                var current = new Button
-                {
-                    Width = 100,
-                    Height = 100
-                };
-                current.MouseRightButtonDown += ButtonEdition;
-                current.Click += playAction;
-                var grid = new Grid();
-                current.Tag = act;
-                current.Content = grid;
-                act.text = new TextBlock
-                {
-                    Text = act.name,
-                    TextAlignment = TextAlignment.Center,
-                    TextWrapping = TextWrapping.Wrap,
-                    VerticalAlignment = VerticalAlignment.Center
-                };
-                if (act.source != null)
-                {
-                    using var stream = new MemoryStream(act.source);
-                    var bitmap = new BitmapImage();
-                    bitmap.BeginInit();
-                    bitmap.StreamSource = stream;
-                    bitmap.CacheOption = BitmapCacheOption.OnLoad;
-                    bitmap.EndInit();
-                    bitmap.Freeze();
-                    act.image = new Image
-                    {
-                        Source = bitmap
-                    };
-                }
-                else
-                    act.image = new Image();
-                grid.Children.Add(act.image);
-                grid.Children.Add(act.text);
-                icons.Children.Insert(icons.Children.Count - 1, current);
-            }
-        }
-
-        private void ButtonEdition(object sender, RoutedEventArgs e)
-        {
-            var dialog = new newButton(sender as Button);
-            if (dialog.ShowDialog().Value)
-            {
-                var act = ((Button)sender).Tag as ActionButton;
-                if (dialog.remove)
-                {
-                    App.Data.Buttons.Remove(act);
-                    icons.Children.Remove(sender as Button);
-                }
-                else
-                {
-                    if (dialog.imageData != null)
-                    {
-                        act.source = dialog.imageData;
-                        act.image.Source = dialog.usedImage;
-                    }
-                    else
-                    {
-                        act.source = null;
-                        act.image.Source = null;
-                    }
-                    act.name = dialog.actionName.Text;
-                    act.folder = dialog.folder.Text;
-                    act.file = dialog.file.Text;
-                    act.args = dialog.args.Text;
-
-                    act.text.Text = act.name;
-                }
-            }
+            dialog.Show();
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
@@ -176,20 +117,6 @@ namespace CommandsPannel
         private void Image_MouseDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
-        }
-
-        private void playAction(object sender, RoutedEventArgs e)
-        {
-            var button = sender as Button;
-            var act = button.Tag as ActionButton;
-            Process p = new Process();
-            ProcessStartInfo info = new ProcessStartInfo();
-            info.FileName = act.file;
-            info.WorkingDirectory = act.folder;
-            info.Arguments = act.args;
-            info.UseShellExecute = true;
-            p.StartInfo = info;
-            p.Start();
         }
 
         private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)

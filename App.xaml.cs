@@ -22,6 +22,7 @@ namespace CommandsPannel
     {
         public static ImageSource Blank = ConvertImage(CommandsPannel.Properties.Resources.blank);
         public static WebClient Client = new WebClient();
+        public static MainWindow Window;
         public static Data Data { get; set; }
 
         public static ImageSource ConvertImage(Bitmap bitmap)

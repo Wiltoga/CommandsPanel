@@ -24,12 +24,13 @@ namespace CommandsPannel
     public partial class newButton : Window
     {
         public byte[] imageData;
-        public bool remove;
+        public Button initialButton;
         public ImageSource usedImage;
 
         public newButton()
         {
             InitializeComponent();
+            initialButton = null;
             imageData = null;
             usedImage = null;
             Title = "Ajouter un bouton";
@@ -39,8 +40,8 @@ namespace CommandsPannel
         public newButton(Button b)
         {
             InitializeComponent();
+            initialButton = b;
             var act = b.Tag as ActionButton;
-            remove = false;
             imageData = act.source;
             usedImage = act.image.Source;
             actionName.Text = act.name;
@@ -57,13 +58,89 @@ namespace CommandsPannel
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = true;
+            App.Window.Dispatcher.Invoke(() =>
+            {
+                if (initialButton != null)
+                {
+                    var act = initialButton.Tag as ActionButton;
+                    if (imageData != null)
+                    {
+                        act.source = imageData;
+                        act.image.Source = usedImage;
+                    }
+                    else
+                    {
+                        act.source = null;
+                        act.image.Source = null;
+                    }
+                    act.name = actionName.Text;
+                    act.folder = folder.Text;
+                    act.file = file.Text;
+                    act.args = args.Text;
+
+                    act.text.Text = act.name;
+                }
+                else
+                {
+                    var act = new ActionButton
+                    {
+                        folder = folder.Text,
+                        file = file.Text,
+                        args = args.Text,
+                        name = actionName.Text,
+                        source = imageData
+                    };
+                    App.Data.Buttons.Add(act);
+                    var current = new Button
+                    {
+                        Width = 100,
+                        Height = 100
+                    };
+                    current.MouseRightButtonDown += App.Window.ButtonEdition;
+                    current.Click += App.Window.playAction;
+                    var grid = new Grid();
+                    current.Tag = act;
+                    current.Content = grid;
+                    act.text = new TextBlock
+                    {
+                        Text = act.name,
+                        TextAlignment = TextAlignment.Center,
+                        TextWrapping = TextWrapping.Wrap,
+                        VerticalAlignment = VerticalAlignment.Center
+                    };
+                    if (act.source != null)
+                    {
+                        using var stream = new MemoryStream(act.source);
+                        var bitmap = new BitmapImage();
+                        bitmap.BeginInit();
+                        bitmap.StreamSource = stream;
+                        bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                        bitmap.EndInit();
+                        bitmap.Freeze();
+                        act.image = new System.Windows.Controls.Image
+                        {
+                            Source = bitmap
+                        };
+                    }
+                    else
+                        act.image = new System.Windows.Controls.Image();
+                    grid.Children.Add(act.image);
+                    grid.Children.Add(act.text);
+                    App.Window.icons.Children.Insert(App.Window.icons.Children.Count - 1, current);
+                }
+            });
+            Close();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            remove = true;
-            DialogResult = true;
+            App.Window.Dispatcher.Invoke(() =>
+            {
+                var act = initialButton.Tag as ActionButton;
+                App.Data.Buttons.Remove(act);
+                App.Window.icons.Children.Remove(initialButton);
+            });
+            Close();
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
