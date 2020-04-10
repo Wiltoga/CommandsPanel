@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CommandsPannel"
         mc:Ignorable="d"
         Title="" Height="350" Width="400" MinHeight="350" MinWidth="400"
-        Background="#FF151515" WindowStartupLocation="CenterScreen" PreviewKeyDown="Window_PreviewKeyDown">
+        Background="#FF151515" WindowStartupLocation="CenterScreen" PreviewKeyDown="Window_PreviewKeyDown" KeyDown="Window_KeyDown">
     <Grid>
         <TextBlock Text="Dossier d'éxecution :" Margin="5,0,5, 175" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
         <TextBox x:Name="folder" Margin="5,0,5,150" VerticalAlignment="Bottom" Height="20" />
@@ -14,7 +14,7 @@
         <TextBox x:Name="file" Margin="5, 0,5,100" VerticalAlignment="Bottom" Height="20" />
         <TextBlock Text="Arguments :" Margin="5,0,5, 75" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
         <TextBox x:Name="args" Margin="5, 0,5,50" VerticalAlignment="Bottom" Height="20" />
-        <Button Content="Terminer" Padding="20, 10" Margin="5" VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="Button_Click" />
+        <Button Content="Terminer" Padding="20, 10" Margin="5" VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="Button_Click" IsDefault="True" />
         <Button x:Name="removeButton" Content="Supprimer" Padding="20, 10" Margin="5" VerticalAlignment="Bottom" HorizontalAlignment="Left" Template="{DynamicResource CloseWindowButton}" Click="Button_Click_1" />
         <Grid>
             <Grid.ColumnDefinitions>

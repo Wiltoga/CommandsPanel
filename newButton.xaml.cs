@@ -207,6 +207,12 @@ namespace CommandsPannel
             usedImage = null;
         }
 
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+                DialogResult = false;
+        }
+
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.V && (e.KeyboardDevice.Modifiers & ModifierKeys.Control) != 0)
