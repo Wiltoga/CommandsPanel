@@ -179,7 +179,8 @@ namespace CommandsPannel
                         var file = ((string[])e.Data.GetData(DataFormats.FileDrop)).First();
                         var img = new BitmapImage();
                         MemoryStream stream = new MemoryStream();
-                        App.Client.OpenRead(file).CopyTo(stream);
+                        using var fileStream = App.Client.OpenRead(file);
+                        fileStream.CopyTo(stream);
                         stream.Seek(0, SeekOrigin.Begin);
                         img.BeginInit();
                         img.StreamSource = stream;
