@@ -187,6 +187,7 @@ namespace CommandsPannel
             info.FileName = act.file;
             info.WorkingDirectory = act.folder;
             info.Arguments = act.args;
+            info.UseShellExecute = true;
             p.StartInfo = info;
             p.Start();
         }

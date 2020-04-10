@@ -5,21 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CommandsPannel"
         mc:Ignorable="d"
-        Title="" Height="350" Width="300" MinHeight="300" MinWidth="300"
+        Title="" Height="350" Width="400" MinHeight="350" MinWidth="400"
         Background="#FF151515" WindowStartupLocation="CenterScreen" PreviewKeyDown="Window_PreviewKeyDown">
     <Grid>
         <TextBlock Text="Dossier d'éxecution :" Margin="5,0,5, 175" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
         <TextBox x:Name="folder" Margin="5,0,5,150" VerticalAlignment="Bottom" Height="20" />
-        <TextBlock Text="Fichier :" Margin="5,0,5, 125" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
+        <TextBlock Text="Commande / URI :" Margin="5,0,5, 125" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
         <TextBox x:Name="file" Margin="5, 0,5,100" VerticalAlignment="Bottom" Height="20" />
-        <TextBlock Text="arguments :" Margin="5,0,5, 75" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
+        <TextBlock Text="Arguments :" Margin="5,0,5, 75" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
         <TextBox x:Name="args" Margin="5, 0,5,50" VerticalAlignment="Bottom" Height="20" />
         <Button Content="Terminer" Padding="20, 10" Margin="5" VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="Button_Click" />
         <Button x:Name="removeButton" Content="Supprimer" Padding="20, 10" Margin="5" VerticalAlignment="Bottom" HorizontalAlignment="Left" Template="{DynamicResource CloseWindowButton}" Click="Button_Click_1" />
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -30,8 +30,10 @@
             </Border>
             <TextBlock Text="Icône :" Margin="5,0" VerticalAlignment="Top" />
             <Button x:Name="removeIcon" VerticalAlignment="Top" HorizontalAlignment="Right" Content="retirer" Visibility="Hidden" Margin="5,0" Click="removeIcon_Click" />
-            <TextBlock Text="nom :" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5, 0,5,20" />
-            <TextBox x:Name="actionName" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="5, 20,5,0" />
+            <Button Content="Ouvrir un fichier" Margin="5" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="Button_Click_2" />
+            <Button Content="Ouvrir un fichier avec un logiciel" Margin="5,0,5,30" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="Button_Click_3" />
+            <TextBlock Text="Nom :" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5, 0,5,50" />
+            <TextBox x:Name="actionName" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="5, 0,5,10" />
         </Grid>
     </Grid>
 </Window>

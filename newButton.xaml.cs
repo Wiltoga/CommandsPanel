@@ -66,6 +66,38 @@ namespace CommandsPannel
             DialogResult = true;
         }
 
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            var dialog = new OpenFileDialog();
+            dialog.Title = "Choisir le fichier à éxecuter";
+            dialog.Filter = "Tous les fichiers|*.*";
+            if (dialog.ShowDialog().Value)
+            {
+                folder.Text = System.IO.Path.GetDirectoryName(dialog.FileName);
+                file.Text = System.IO.Path.GetFileName(dialog.FileName);
+            }
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            var dialog = new OpenFileDialog();
+            dialog.Title = "Choisir le fichier à éxecuter";
+            dialog.Filter = "Tous les fichiers|*.*";
+            if (dialog.ShowDialog().Value)
+            {
+                var folderName = System.IO.Path.GetDirectoryName(dialog.FileName);
+                var fileName = System.IO.Path.GetFileName(dialog.FileName);
+                dialog.Title = "Choisir le logiciel";
+                dialog.Filter = "Executables|*.exe|Tous les fichiers|*.*";
+                if (dialog.ShowDialog().Value)
+                {
+                    folder.Text = folderName;
+                    file.Text = dialog.FileName;
+                    args.Text = fileName;
+                }
+            }
+        }
+
         private void iconImage_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var dialog = new OpenFileDialog();
