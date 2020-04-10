@@ -26,7 +26,7 @@
                 <RowDefinition Height="200" />
             </Grid.RowDefinitions>
             <Border BorderThickness="1" Margin="0,20,0,0" VerticalAlignment="Top" BorderBrush="#59FFFFFF" HorizontalAlignment="Center">
-                <Image VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="iconImage" AllowDrop="True" Source="/blank.png" Stretch="Uniform" Cursor="Hand" Drop="Image_Drop" DragEnter="Image_DragEnter" DragOver="Image_DragOver" MouseDown="iconImage_MouseDown" />
+                <Image VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="iconImage" AllowDrop="True" Source="/blank.png" Stretch="Uniform" Cursor="Hand" Drop="Image_Drop" DragEnter="Image_DragEnter" DragOver="Image_DragOver" MouseLeftButtonDown="iconImage_MouseLeftButtonDown" />
             </Border>
             <TextBlock Text="Icône :" Margin="5,0" VerticalAlignment="Top" />
             <Button x:Name="removeIcon" VerticalAlignment="Top" HorizontalAlignment="Right" Content="retirer" Visibility="Hidden" Margin="5,0" Click="removeIcon_Click" />

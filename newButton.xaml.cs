@@ -98,7 +98,7 @@ namespace CommandsPannel
             }
         }
 
-        private void iconImage_MouseDown(object sender, MouseButtonEventArgs e)
+        private void iconImage_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var dialog = new OpenFileDialog();
             dialog.Filter = "Images|*.png;*.jpg;*.jpeg;*.bmp|Tous les fichiers|*.*";
