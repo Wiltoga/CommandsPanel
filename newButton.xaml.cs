@@ -24,6 +24,7 @@ namespace CommandsPannel
     public partial class newButton : Window
     {
         public byte[] imageData;
+        public bool remove;
         public ImageSource usedImage;
 
         public newButton()
@@ -32,10 +33,36 @@ namespace CommandsPannel
             imageData = null;
             usedImage = null;
             Title = "Ajouter un bouton";
+            removeButton.Visibility = Visibility.Hidden;
+        }
+
+        public newButton(Button b)
+        {
+            InitializeComponent();
+            var act = b.Tag as ActionButton;
+            remove = false;
+            imageData = act.source;
+            usedImage = act.image.Source;
+            actionName.Text = act.name;
+            folder.Text = act.folder;
+            file.Text = act.file;
+            args.Text = act.args;
+            if (act.source != null)
+            {
+                iconImage.Source = usedImage;
+                removeIcon.Visibility = Visibility.Visible;
+            }
+            Title = "Modifier un bouton";
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            DialogResult = true;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            remove = true;
             DialogResult = true;
         }
 
@@ -146,10 +173,6 @@ namespace CommandsPannel
             imageData = null;
             iconImage.Source = App.Blank;
             usedImage = null;
-        }
-
-        private void Window_KeyDown(object sender, KeyEventArgs e)
-        {
         }
 
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)

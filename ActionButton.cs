@@ -11,7 +11,9 @@ namespace CommandsPannel
     [Serializable]
     public class ActionButton
     {
-        public string commands;
+        public string args;
+        public string file;
+        public string folder;
 
         [NonSerialized]
         public Image image;
