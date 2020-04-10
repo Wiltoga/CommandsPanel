@@ -1,4 +1,5 @@
-﻿# Commands Panel
+﻿![icone](icon.png)
+ # Commands Panel
 
 > A small app that displays several button executing single cmd commands
 
