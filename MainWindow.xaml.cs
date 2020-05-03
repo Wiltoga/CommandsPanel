@@ -104,6 +104,11 @@ namespace CommandsPannel
             dialog.Show();
         }
 
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            App.SaveData();
+        }
+
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
             Topmost = true;
