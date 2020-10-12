@@ -30,9 +30,12 @@ namespace CommandsPannel
             App.Window = this;
             Window_MouseLeave(null, null);
             App.LoadData();
-            WindowStartupLocation = WindowStartupLocation.Manual;
-            Top = App.Data.Top;
-            Left = App.Data.Left;
+            if (!Data.Portable)
+            {
+                WindowStartupLocation = WindowStartupLocation.Manual;
+                Top = App.Data.Top;
+                Left = App.Data.Left;
+            }
             foreach (var item in App.Data.Buttons)
             {
                 var current = new Button
