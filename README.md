@@ -33,6 +33,8 @@ Vous avez aussi la possibilité de laisser l'application toujours au dessus, ou 
 
 ![top](https://i.imgur.com/Ji3iJLv.gif)
 
+Pour utiliser l'application sur une clé USB en portable, créez un dossier "data" à côté de l'éxecutable avant de créer des boutons.
+
 ## Changelog
 
 - v0.0.1
