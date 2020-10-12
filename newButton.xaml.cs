@@ -169,6 +169,24 @@ namespace CommandsPannel
                 folder.Text = directory;
                 file.Text = System.IO.Path.GetFileName(dialog.FileName);
                 args.Text = "";
+                if (actionName.Text == "")
+                    actionName.Text = System.IO.Path.GetFileNameWithoutExtension(dialog.FileName);
+                if (usedImage == null && System.IO.Path.GetExtension(dialog.FileName) == ".exe")
+                {
+                    var img = new BitmapImage();
+                    using var stream = new MemoryStream();
+                    System.Drawing.Icon.ExtractAssociatedIcon(dialog.FileName).ToBitmap().Save(stream, ImageFormat.Png);
+                    stream.Seek(0, SeekOrigin.Begin);
+                    img.BeginInit();
+                    img.StreamSource = stream;
+                    img.CacheOption = BitmapCacheOption.OnLoad;
+                    img.EndInit();
+                    img.Freeze();
+                    iconImage.Source = img;
+                    imageData = stream.GetBuffer();
+                    usedImage = iconImage.Source;
+                    removeIcon.Visibility = Visibility.Visible;
+                }
             }
         }
 
@@ -196,6 +214,24 @@ namespace CommandsPannel
                     folder.Text = folderName;
                     file.Text = exe;
                     args.Text = fileName;
+                    if (actionName.Text == "")
+                        actionName.Text = System.IO.Path.GetFileNameWithoutExtension(fileName);
+                    if (usedImage == null && System.IO.Path.GetExtension(dialog.FileName) == ".exe")
+                    {
+                        var img = new BitmapImage();
+                        using var stream = new MemoryStream();
+                        System.Drawing.Icon.ExtractAssociatedIcon(dialog.FileName).ToBitmap().Save(stream, ImageFormat.Png);
+                        stream.Seek(0, SeekOrigin.Begin);
+                        img.BeginInit();
+                        img.StreamSource = stream;
+                        img.CacheOption = BitmapCacheOption.OnLoad;
+                        img.EndInit();
+                        img.Freeze();
+                        iconImage.Source = img;
+                        imageData = stream.GetBuffer();
+                        usedImage = iconImage.Source;
+                        removeIcon.Visibility = Visibility.Visible;
+                    }
                 }
             }
         }
