@@ -183,7 +183,7 @@ namespace CommandsPannel
             if (dialog.ShowDialog().Value)
             {
                 var img = new BitmapImage();
-                MemoryStream stream = new MemoryStream();
+                using MemoryStream stream = new MemoryStream();
                 App.Client.OpenRead(dialog.FileName).CopyTo(stream);
                 stream.Seek(0, SeekOrigin.Begin);
                 img.BeginInit();
@@ -228,7 +228,7 @@ namespace CommandsPannel
                     {
                         var uri = (string)e.Data.GetData(DataFormats.StringFormat);
                         var img = new BitmapImage();
-                        MemoryStream stream = new MemoryStream();
+                        using MemoryStream stream = new MemoryStream();
                         App.Client.OpenRead(uri).CopyTo(stream);
                         stream.Seek(0, SeekOrigin.Begin);
                         img.BeginInit();
@@ -255,7 +255,7 @@ namespace CommandsPannel
                     {
                         var file = ((string[])e.Data.GetData(DataFormats.FileDrop)).First();
                         var img = new BitmapImage();
-                        MemoryStream stream = new MemoryStream();
+                        using MemoryStream stream = new MemoryStream();
                         using var fileStream = App.Client.OpenRead(file);
                         fileStream.CopyTo(stream);
                         stream.Seek(0, SeekOrigin.Begin);

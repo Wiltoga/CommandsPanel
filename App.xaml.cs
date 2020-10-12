@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Drawing.Imaging;
 using System.Windows.Media.Imaging;
 using System.Net;
+using System.Runtime.Serialization;
 
 namespace CommandsPannel
 {
@@ -20,10 +21,21 @@ namespace CommandsPannel
     /// </summary>
     public partial class App : Application
     {
+        #region Public Fields
+
         public static ImageSource Blank = ConvertImage(CommandsPannel.Properties.Resources.blank);
         public static WebClient Client = new WebClient();
         public static MainWindow Window;
+
+        #endregion Public Fields
+
+        #region Public Properties
+
         public static Data Data { get; set; }
+
+        #endregion Public Properties
+
+        #region Public Methods
 
         public static ImageSource ConvertImage(Bitmap bitmap)
         {
@@ -39,15 +51,26 @@ namespace CommandsPannel
             return img;
         }
 
+        public static T GetInfo<T>(SerializationInfo info, string str)
+        {
+            try
+            {
+                return (T)info.GetValue(str, typeof(T));
+            }
+            catch (SerializationException)
+            {
+                return default;
+            }
+        }
+
         public static void LoadData()
         {
-            var dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CommandsPannel");
-            var path = Path.Combine(dir, "buttons.cpser");
+            var path = Path.Combine(Data.WorkingDir, "data.json");
             if (File.Exists(path))
             {
-                var formatter = new BinaryFormatter();
-                using var stream = new FileStream(path, FileMode.Open, FileAccess.Read);
-                Data = (Data)formatter.Deserialize(stream);
+                var formatter = new Newtonsoft.Json.JsonSerializer();
+                using var stream = new Newtonsoft.Json.JsonTextReader(new StreamReader(path)) { CloseInput = true };
+                Data = formatter.Deserialize<Data>(stream);
             }
             else
             {
@@ -64,13 +87,15 @@ namespace CommandsPannel
                 });
                 Data.Buttons.Add(new ActionButton
                 {
-                    file = "Explorer",
-                    name = "explorer"
+                    file = "explorer",
+                    name = "Explorer"
                 });
-                Directory.CreateDirectory(dir);
-                var formatter = new BinaryFormatter();
-                using var stream = new FileStream(path, FileMode.Create, FileAccess.Write);
-                formatter.Serialize(stream, Data);
+                Directory.CreateDirectory(Data.WorkingDir);
+                var formatter = new Newtonsoft.Json.JsonSerializer();
+                formatter.Formatting = Newtonsoft.Json.Formatting.Indented;
+                using var JSONstream = new StreamWriter(Path.Combine(Data.WorkingDir, "data.json"));
+                formatter.Serialize(JSONstream, Data);
+                JSONstream.Flush();
             }
         }
 
@@ -78,13 +103,16 @@ namespace CommandsPannel
         {
             Data.Top = Current.MainWindow.Top + 200;
             Data.Left = Current.MainWindow.Left;
-            var dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CommandsPannel");
-            var path = Path.Combine(dir, "buttons.cpser");
+            var path = Path.Combine(Data.WorkingDir, "data.json");
             if (!File.Exists(path))
-                Directory.CreateDirectory(dir);
-            var formatter = new BinaryFormatter();
-            using var stream = new FileStream(path, FileMode.Create, FileAccess.Write);
-            formatter.Serialize(stream, Data);
+                Directory.CreateDirectory(Data.WorkingDir);
+            var formatter = new Newtonsoft.Json.JsonSerializer();
+            formatter.Formatting = Newtonsoft.Json.Formatting.Indented;
+            using var JSONstream = new StreamWriter(path);
+            formatter.Serialize(JSONstream, Data);
+            JSONstream.Flush();
         }
+
+        #endregion Public Methods
     }
 }

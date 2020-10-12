@@ -22,6 +22,8 @@ namespace CommandsPannel
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region Public Constructors
+
         public MainWindow()
         {
             InitializeComponent();
@@ -72,6 +74,10 @@ namespace CommandsPannel
             }
         }
 
+        #endregion Public Constructors
+
+        #region Public Methods
+
         public void ButtonEdition(object sender, RoutedEventArgs e)
         {
             var dialog = new newButton(sender as Button);
@@ -91,6 +97,10 @@ namespace CommandsPannel
             p.StartInfo = info;
             p.Start();
         }
+
+        #endregion Public Methods
+
+        #region Private Methods
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -149,5 +159,7 @@ namespace CommandsPannel
             Width = 20;
             pannel.Visibility = Visibility.Hidden;
         }
+
+        #endregion Private Methods
     }
 }
