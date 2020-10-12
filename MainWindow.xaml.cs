@@ -107,7 +107,6 @@ namespace CommandsPannel
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            App.SaveData();
             Close();
         }
 
@@ -145,6 +144,11 @@ namespace CommandsPannel
             else if (e.Delta < 0)
                 for (int i = 0; i < -e.Delta; i++)
                     (sender as ScrollViewer).LineRight();
+        }
+
+        private void Window_Closing(object sender, EventArgs e)
+        {
+            App.SaveData();
         }
 
         private void Window_MouseEnter(object sender, MouseEventArgs e)
