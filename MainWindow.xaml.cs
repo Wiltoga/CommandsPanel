@@ -149,9 +149,9 @@ namespace CommandsPannel
 
         private void Window_MouseEnter(object sender, MouseEventArgs e)
         {
-            Top -= 200;
             Height = 450;
             Width = 800;
+            Top -= 200;
             pannel.Visibility = Visibility.Visible;
         }
 
