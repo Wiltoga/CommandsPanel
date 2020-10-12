@@ -23,9 +23,15 @@ namespace CommandsPannel
     /// </summary>
     public partial class newButton : Window
     {
+        #region Public Fields
+
         public byte[] imageData;
         public Button initialButton;
         public ImageSource usedImage;
+
+        #endregion Public Fields
+
+        #region Public Constructors
 
         public newButton()
         {
@@ -55,6 +61,10 @@ namespace CommandsPannel
             }
             Title = "Modifier un bouton";
         }
+
+        #endregion Public Constructors
+
+        #region Private Methods
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -150,15 +160,22 @@ namespace CommandsPannel
             dialog.Filter = "Tous les fichiers|*.*";
             if (dialog.ShowDialog().Value)
             {
-                folder.Text = System.IO.Path.GetDirectoryName(dialog.FileName);
+                var directory = System.IO.Path.GetDirectoryName(dialog.FileName);
+                if (Data.Portable && System.IO.Path.GetPathRoot(Directory.GetCurrentDirectory()) == System.IO.Path.GetPathRoot(dialog.FileName))
+                {
+                    var l = System.IO.Path.GetPathRoot(dialog.FileName).Length;
+                    directory = '\\' + directory.Substring(l);
+                }
+                folder.Text = directory;
                 file.Text = System.IO.Path.GetFileName(dialog.FileName);
+                args.Text = "";
             }
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             var dialog = new OpenFileDialog();
-            dialog.Title = "Choisir le fichier à éxecuter";
+            dialog.Title = "Choisir le fichier à ouvrir";
             dialog.Filter = "Tous les fichiers|*.*";
             if (dialog.ShowDialog().Value)
             {
@@ -168,8 +185,16 @@ namespace CommandsPannel
                 dialog.Filter = "Executables|*.exe|Tous les fichiers|*.*";
                 if (dialog.ShowDialog().Value)
                 {
+                    string exe = dialog.FileName;
+                    if (Data.Portable && System.IO.Path.GetPathRoot(Directory.GetCurrentDirectory()) == System.IO.Path.GetPathRoot(dialog.FileName))
+                    {
+                        var l = System.IO.Path.GetPathRoot(folderName).Length;
+                        folderName = '\\' + folderName.Substring(l);
+                        l = System.IO.Path.GetPathRoot(exe).Length;
+                        exe = '\\' + exe.Substring(l);
+                    }
                     folder.Text = folderName;
-                    file.Text = dialog.FileName;
+                    file.Text = exe;
                     args.Text = fileName;
                 }
             }
@@ -309,5 +334,7 @@ namespace CommandsPannel
                 }
             }
         }
+
+        #endregion Private Methods
     }
 }
