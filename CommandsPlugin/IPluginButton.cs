@@ -5,7 +5,7 @@ using System.Text;
 namespace CommandsPlugin
 {
     /// <summary>
-    /// Interface used to creates custom buttons. Loaded only when launching the Commands Pannel.
+    /// Interface used to creates custom buttons.
     /// </summary>
     public interface IPluginButton
     {
