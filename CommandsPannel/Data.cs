@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CommandsPlugin;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -11,7 +13,12 @@ namespace CommandsPannel
         #region Public Fields
 
         public List<ActionButton> Buttons;
+
         public double Left;
+
+        [JsonIgnore]
+        public List<ICommandsPlugin> Plugins;
+
         public double Top;
 
         #endregion Public Fields
@@ -19,7 +26,7 @@ namespace CommandsPannel
         #region Public Properties
 
         public static bool Portable => Directory.Exists("data");
-        public static string WorkingDir => Portable ? "data" : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CommandsPannel");
+        public static string WorkingDir => Portable ? Path.Combine(Directory.GetCurrentDirectory(), "data") : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CommandsPannel");
 
         #endregion Public Properties
 

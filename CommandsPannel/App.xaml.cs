@@ -13,6 +13,8 @@ using System.Drawing.Imaging;
 using System.Windows.Media.Imaging;
 using System.Net;
 using System.Runtime.Serialization;
+using System.Reflection;
+using CommandsPlugin;
 
 namespace CommandsPannel
 {
@@ -96,6 +98,26 @@ namespace CommandsPannel
                 using var JSONstream = new StreamWriter(Path.Combine(Data.WorkingDir, "data.json"));
                 formatter.Serialize(JSONstream, Data);
                 JSONstream.Flush();
+            }
+            Data.Plugins = new List<ICommandsPlugin>();
+            var pluginsPath = Path.Combine(Data.WorkingDir, "plugins");
+            if (!Directory.Exists(pluginsPath))
+                Directory.CreateDirectory(pluginsPath);
+            else
+            {
+                var files = Directory.GetFiles(pluginsPath);
+                foreach (var item in files)
+                {
+                    try
+                    {
+                        foreach (var type in Assembly.LoadFile(item).GetTypes())
+                            if (typeof(ICommandsPlugin).IsAssignableFrom(type))
+                                Data.Plugins.Add((ICommandsPlugin)Activator.CreateInstance(type));
+                    }
+                    catch (Exception)
+                    {
+                    }
+                }
             }
         }
 

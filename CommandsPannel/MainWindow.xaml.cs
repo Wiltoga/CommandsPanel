@@ -36,6 +36,46 @@ namespace CommandsPannel
                 Top = App.Data.Top;
                 Left = App.Data.Left;
             }
+            foreach (var item in App.Data.Plugins)
+            {
+                var current = new Button
+                {
+                    Width = 100,
+                    Height = 100
+                };
+                current.MouseRightButtonDown += (sender, e) => item.RightClick();
+                current.Click += (sender, e) => item.LeftClick();
+                var grid = new Grid();
+                current.Tag = item;
+                current.Content = grid;
+                var text = new TextBlock
+                {
+                    Text = item.Name,
+                    TextAlignment = TextAlignment.Center,
+                    TextWrapping = TextWrapping.Wrap,
+                    VerticalAlignment = VerticalAlignment.Center
+                };
+                Image image;
+                if (item.Image != null)
+                {
+                    using var stream = new MemoryStream(item.Image);
+                    var bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    bitmap.StreamSource = stream;
+                    bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                    bitmap.EndInit();
+                    bitmap.Freeze();
+                    image = new Image
+                    {
+                        Source = bitmap
+                    };
+                }
+                else
+                    image = new Image();
+                grid.Children.Add(image);
+                grid.Children.Add(text);
+                icons.Children.Insert(icons.Children.Count - 1, current);
+            }
             foreach (var item in App.Data.Buttons)
             {
                 var current = new Button
