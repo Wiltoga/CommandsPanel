@@ -48,20 +48,20 @@ Note : les plug-ins ne devraient pas avoir à utiliser de fichiers externes, pr�
 
 ## Changelog
 
-- 0.0.4
+- 0.4
   - can now add plugins that adds totally custom button at launch. These can't be edited inside the software as their purpose is decided in their code.
 
-- 0.0.3
+- 0.3
   - mode de sauvegarde changé pour anticiper les changements futurs
   - application portable possible
   - détection automatique des icones et noms des actions générées
 
-- v0.0.2
+- v0.2
   - correction de bugs
   - liens par défaut
   - boutons pour générer rapidement une action pour ouvrir un éxécutable
 
-- v0.0.1
+- v0.1
   - Application créée OwO
 
 ## Meta
