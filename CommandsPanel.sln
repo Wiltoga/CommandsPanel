@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommandsPlugin", "CommandsPlugin\CommandsPlugin.csproj", "{7B8DCA6C-0CD1-4CA2-8120-852146221F05}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommandsPannel", "CommandsPannel\CommandsPannel.csproj", "{5310576D-B977-4BD5-B36C-33872C59ED5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommandsPanel", "CommandsPannel\CommandsPanel.csproj", "{5310576D-B977-4BD5-B36C-33872C59ED5B}"
 	ProjectSection(ProjectDependencies) = postProject
 		{7B8DCA6C-0CD1-4CA2-8120-852146221F05} = {7B8DCA6C-0CD1-4CA2-8120-852146221F05}
 	EndProjectSection

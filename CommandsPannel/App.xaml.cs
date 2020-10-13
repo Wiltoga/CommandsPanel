@@ -18,14 +18,11 @@ using CommandsPlugin;
 
 namespace CommandsPannel
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
         #region Public Fields
 
-        public static ImageSource Blank = ConvertImage(CommandsPannel.Properties.Resources.blank);
+        public static ImageSource Blank = ConvertImage(CommandsPanel.Properties.Resources.blank);
         public static WebClient Client = new WebClient();
         public static MainWindow Window;
 

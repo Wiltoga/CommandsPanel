@@ -25,22 +25,22 @@ namespace CommandsPlugin
         public abstract string ID { get; }
 
         /// <summary>
-        /// Map of the saved bool.
+        /// Map of the saved bool. Will be synchronized between sessions.
         /// </summary>
         public Dictionary<string, bool> SavedBools { get; set; }
 
         /// <summary>
-        /// Map of the saved double.
+        /// Map of the saved double. Will be synchronized between sessions.
         /// </summary>
         public Dictionary<string, double> SavedDoubles { get; set; }
 
         /// <summary>
-        /// Map of the saved int.
+        /// Map of the saved int. Will be synchronized between sessions.
         /// </summary>
         public Dictionary<string, int> SavedInts { get; set; }
 
         /// <summary>
-        /// Map of the saved string.
+        /// Map of the saved string. Will be synchronized between sessions.
         /// </summary>
         public Dictionary<string, string> SavedStrings { get; set; }
 
