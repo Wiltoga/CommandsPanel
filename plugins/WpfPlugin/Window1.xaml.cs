@@ -10,26 +10,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace test_plugin
+namespace WpfPlugin
 {
     /// <summary>
-    /// Logique d'interaction pour test.xaml
+    /// Logique d'interaction pour Window1.xaml
     /// </summary>
-    public partial class test : Window
+    public partial class Window1 : Window
     {
-        #region Public Constructors
-
-        public test()
+        public Window1()
         {
             InitializeComponent();
         }
-
-        #endregion Public Constructors
-
-        #region Public Properties
-
-        public string Text { get => text.Text; set => text.Text = value; }
-
-        #endregion Public Properties
     }
 }

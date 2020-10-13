@@ -36,45 +36,53 @@ namespace CommandsPannel
                 Top = App.Data.Top;
                 Left = App.Data.Left;
             }
-            foreach (var item in App.Data.Plugins)
+            foreach (var plugin in App.Data.Plugins)
             {
-                var current = new Button
+                plugin.SavedDoubles = App.Data.PluginData[plugin.ID].Doubles;
+                plugin.SavedStrings = App.Data.PluginData[plugin.ID].Strings;
+                plugin.SavedInts = App.Data.PluginData[plugin.ID].Ints;
+                plugin.SavedBools = App.Data.PluginData[plugin.ID].Bools;
+                plugin.OnLoad();
+                foreach (var item in plugin.ButtonsToAdd)
                 {
-                    Width = 100,
-                    Height = 100
-                };
-                current.MouseRightButtonDown += (sender, e) => item.RightClick();
-                current.Click += (sender, e) => item.LeftClick();
-                var grid = new Grid();
-                current.Tag = item;
-                current.Content = grid;
-                var text = new TextBlock
-                {
-                    Text = item.Name,
-                    TextAlignment = TextAlignment.Center,
-                    TextWrapping = TextWrapping.Wrap,
-                    VerticalAlignment = VerticalAlignment.Center
-                };
-                Image image;
-                if (item.Image != null)
-                {
-                    using var stream = new MemoryStream(item.Image);
-                    var bitmap = new BitmapImage();
-                    bitmap.BeginInit();
-                    bitmap.StreamSource = stream;
-                    bitmap.CacheOption = BitmapCacheOption.OnLoad;
-                    bitmap.EndInit();
-                    bitmap.Freeze();
-                    image = new Image
+                    var current = new Button
                     {
-                        Source = bitmap
+                        Width = 100,
+                        Height = 100
                     };
+                    current.MouseRightButtonDown += (sender, e) => item.RightClick();
+                    current.Click += (sender, e) => item.LeftClick();
+                    var grid = new Grid();
+                    current.Tag = item;
+                    current.Content = grid;
+                    var text = new TextBlock
+                    {
+                        Text = item.Name,
+                        TextAlignment = TextAlignment.Center,
+                        TextWrapping = TextWrapping.Wrap,
+                        VerticalAlignment = VerticalAlignment.Center
+                    };
+                    Image image;
+                    if (item.Image != null)
+                    {
+                        using var stream = new MemoryStream(item.Image);
+                        var bitmap = new BitmapImage();
+                        bitmap.BeginInit();
+                        bitmap.StreamSource = stream;
+                        bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                        bitmap.EndInit();
+                        bitmap.Freeze();
+                        image = new Image
+                        {
+                            Source = bitmap
+                        };
+                    }
+                    else
+                        image = new Image();
+                    grid.Children.Add(image);
+                    grid.Children.Add(text);
+                    icons.Children.Insert(icons.Children.Count - 1, current);
                 }
-                else
-                    image = new Image();
-                grid.Children.Add(image);
-                grid.Children.Add(text);
-                icons.Children.Insert(icons.Children.Count - 1, current);
             }
             foreach (var item in App.Data.Buttons)
             {

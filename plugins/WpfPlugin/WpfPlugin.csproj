@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="CommandsPlugin">
+      <HintPath>..\..\..\CommandsPlugin\bin\Release\netstandard2.0\CommandsPlugin.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

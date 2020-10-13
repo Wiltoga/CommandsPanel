@@ -4,36 +4,22 @@ using System.Text;
 
 namespace CommandsPlugin
 {
-    /// <summary>
-    /// Interface used to creates custom buttons. Loaded only when launching the Commands Pannel.
-    /// </summary>
-    public interface ICommandsPlugin
+    public abstract class ICommandsPlugin
     {
         #region Public Properties
 
-        /// <summary>
-        /// The data of the image for the button. Can be any common image format.
-        /// </summary>
-        byte[] Image { get; }
-
-        /// <summary>
-        /// The name displayed on the button.
-        /// </summary>
-        string Name { get; }
+        public abstract IEnumerable<IPluginButton> ButtonsToAdd { get; }
+        public abstract string ID { get; }
+        public Dictionary<string, bool> SavedBools { get; set; }
+        public Dictionary<string, double> SavedDoubles { get; set; }
+        public Dictionary<string, int> SavedInts { get; set; }
+        public Dictionary<string, string> SavedStrings { get; set; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        /// <summary>
-        /// Function called when performing a left click on the button.
-        /// </summary>
-        void LeftClick();
-
-        /// <summary>
-        /// Function called when performing a right click on the button.
-        /// </summary>
-        void RightClick();
+        public abstract void OnLoad();
 
         #endregion Public Methods
     }

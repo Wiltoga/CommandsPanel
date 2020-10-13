@@ -99,6 +99,8 @@ namespace CommandsPannel
                 formatter.Serialize(JSONstream, Data);
                 JSONstream.Flush();
             }
+            if (Data.PluginData == null)
+                Data.PluginData = new Dictionary<string, Data.Plugin>();
             Data.Plugins = new List<ICommandsPlugin>();
             var pluginsPath = Path.Combine(Data.WorkingDir, "plugins");
             if (!Directory.Exists(pluginsPath))
@@ -112,7 +114,12 @@ namespace CommandsPannel
                     {
                         foreach (var type in Assembly.LoadFile(item).GetTypes())
                             if (typeof(ICommandsPlugin).IsAssignableFrom(type))
-                                Data.Plugins.Add((ICommandsPlugin)Activator.CreateInstance(type));
+                            {
+                                var plugin = (ICommandsPlugin)Activator.CreateInstance(type);
+                                Data.Plugins.Add(plugin);
+                                if (!Data.PluginData.ContainsKey(plugin.ID))
+                                    Data.PluginData.Add(plugin.ID, new Data.Plugin());
+                            }
                     }
                     catch (Exception)
                     {
