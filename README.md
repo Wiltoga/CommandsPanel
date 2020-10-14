@@ -1,4 +1,4 @@
-﻿![icone](icon.png)
+﻿![icone](CommandsPannel/icon.png)
 # Commands Panel
 
 ## NÉCÉSSITE LE [Microsoft .NET Core 3.1](https://dotnet.microsoft.com/download)
