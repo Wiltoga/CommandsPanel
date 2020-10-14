@@ -127,7 +127,7 @@ namespace CommandsPannel
 
         public static void SaveData()
         {
-            Data.Top = Current.MainWindow.Top + 200;
+            Data.Top = Current.MainWindow.Top + ((Current.MainWindow as MainWindow).Expanded ? 200 : 0);
             Data.Left = Current.MainWindow.Left;
             var path = Path.Combine(Data.WorkingDir, "data.json");
             if (!File.Exists(path))

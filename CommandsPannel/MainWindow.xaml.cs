@@ -28,6 +28,7 @@ namespace CommandsPannel
         {
             InitializeComponent();
             App.Window = this;
+            Expanded = false;
             Window_MouseLeave(null, null);
             App.LoadData();
             if (!Data.Portable)
@@ -127,6 +128,12 @@ namespace CommandsPannel
 
         #endregion Public Constructors
 
+        #region Public Properties
+
+        public bool Expanded { get; private set; }
+
+        #endregion Public Properties
+
         #region Public Methods
 
         public void ButtonEdition(object sender, RoutedEventArgs e)
@@ -201,6 +208,7 @@ namespace CommandsPannel
 
         private void Window_MouseEnter(object sender, MouseEventArgs e)
         {
+            Expanded = true;
             Height = 450;
             Width = 800;
             Top -= 200;
@@ -209,6 +217,7 @@ namespace CommandsPannel
 
         private void Window_MouseLeave(object sender, MouseEventArgs e)
         {
+            Expanded = false;
             Top += 200;
             Height = 250;
             Width = 20;
