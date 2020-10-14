@@ -32,10 +32,10 @@ namespace CommandsPannel
             Window_MouseLeave(null, null);
             App.LoadData();
             OpeningFlow = 0;
+            windowFlow.SelectedIndex = App.Data.RightToLeft ? 1 : 0;
+            windowFlow_DropDownClosed(null, null);
             if (!Data.Portable)
             {
-                windowFlow.SelectedIndex = App.Data.RightToLeft ? 1 : 0;
-                windowFlow_DropDownClosed(null, null);
                 WindowStartupLocation = WindowStartupLocation.Manual;
                 Top = App.Data.Top;
                 Left = App.Data.Left;
