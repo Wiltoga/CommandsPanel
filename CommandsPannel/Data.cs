@@ -16,6 +16,7 @@ namespace CommandsPannel
         public List<ActionButton> Buttons;
 
         public double Left;
+        public bool RightToLeft;
         public Dictionary<string, Plugin> PluginData;
 
         [JsonIgnore]

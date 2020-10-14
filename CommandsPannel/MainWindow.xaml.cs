@@ -31,8 +31,11 @@ namespace CommandsPannel
             Expanded = false;
             Window_MouseLeave(null, null);
             App.LoadData();
+            OpeningFlow = 0;
             if (!Data.Portable)
             {
+                windowFlow.SelectedIndex = App.Data.RightToLeft ? 1 : 0;
+                windowFlow_DropDownClosed(null, null);
                 WindowStartupLocation = WindowStartupLocation.Manual;
                 Top = App.Data.Top;
                 Left = App.Data.Left;
@@ -132,6 +135,8 @@ namespace CommandsPannel
 
         public bool Expanded { get; private set; }
 
+        public int OpeningFlow { get; set; }
+
         #endregion Public Properties
 
         #region Public Methods
@@ -212,6 +217,8 @@ namespace CommandsPannel
             Height = 450;
             Width = 800;
             Top -= 200;
+            if (OpeningFlow == 1)
+                Left -= 780;
             pannel.Visibility = Visibility.Visible;
         }
 
@@ -221,7 +228,32 @@ namespace CommandsPannel
             Top += 200;
             Height = 250;
             Width = 20;
+            if (OpeningFlow == 1)
+                Left += 780;
             pannel.Visibility = Visibility.Hidden;
+        }
+
+        private void windowFlow_DropDownClosed(object sender, EventArgs e)
+        {
+            if (windowFlow.SelectedIndex != OpeningFlow)
+                if (windowFlow.SelectedIndex == 1)
+                {
+                    OpeningFlow = 1;
+                    leftContent.Content = movepad;
+                    rightContent.Content = pannel;
+                    leftColumn.Width = new GridLength(1, GridUnitType.Star);
+                    rightColumn.Width = new GridLength(20);
+                    blueLine.HorizontalAlignment = HorizontalAlignment.Left;
+                }
+                else if (windowFlow.SelectedIndex == 0)
+                {
+                    OpeningFlow = 0;
+                    leftContent.Content = pannel;
+                    rightContent.Content = movepad;
+                    rightColumn.Width = new GridLength(1, GridUnitType.Star);
+                    leftColumn.Width = new GridLength(20);
+                    blueLine.HorizontalAlignment = HorizontalAlignment.Right;
+                }
         }
 
         #endregion Private Methods
