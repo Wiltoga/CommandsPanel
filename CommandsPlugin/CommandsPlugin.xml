@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CommandsPlugin</name>
+    </assembly>
+    <members>
+        <member name="T:CommandsPlugin.ICommandsPlugin">
+            <summary>
+            Main plugin file. Loaded only when launching the Commands Pannel. Will be used to
+            instanciate buttons on the command pannel. These buttons can then no longer be changed until
+            the next restart.
+            </summary>
+        </member>
+        <member name="P:CommandsPlugin.ICommandsPlugin.ButtonsToAdd">
+            <summary>
+            List of the buttons to add to the panel. Only the one added during the OnLoad() will
+            take effect.
+            </summary>
+        </member>
+        <member name="P:CommandsPlugin.ICommandsPlugin.ID">
+            <summary>
+            ID of the plugin. Must be unique in some way.
+            </summary>
+        </member>
+        <member name="P:CommandsPlugin.ICommandsPlugin.SavedBools">
+            <summary>
+            Map of the saved bool. Will be synchronized between sessions.
+            </summary>
+        </member>
+        <member name="P:CommandsPlugin.ICommandsPlugin.SavedDoubles">
+            <summary>
+            Map of the saved double. Will be synchronized between sessions.
+            </summary>
+        </member>
+        <member name="P:CommandsPlugin.ICommandsPlugin.SavedInts">
+            <summary>
+            Map of the saved int. Will be synchronized between sessions.
+            </summary>
+        </member>
+        <member name="P:CommandsPlugin.ICommandsPlugin.SavedStrings">
+            <summary>
+            Map of the saved string. Will be synchronized between sessions.
+            </summary>
+        </member>
+        <member name="M:CommandsPlugin.ICommandsPlugin.OnLoad(System.String)">
+            <summary>
+            Called once, and before launching the command panel. This is the only time you can
+            create buttons.
+            </summary>
+        </member>
+        <member name="T:CommandsPlugin.IPluginButton">
+            <summary>
+            Interface used to creates custom buttons.
+            </summary>
+        </member>
+        <member name="P:CommandsPlugin.IPluginButton.Image">
+            <summary>
+            The data of the image for the button. Can be any common image format.
+            </summary>
+        </member>
+        <member name="P:CommandsPlugin.IPluginButton.Name">
+            <summary>
+            The name displayed on the button.
+            </summary>
+        </member>
+        <member name="M:CommandsPlugin.IPluginButton.LeftClick">
+            <summary>
+            Function called when performing a left click on the button.
+            </summary>
+        </member>
+        <member name="M:CommandsPlugin.IPluginButton.RightClick">
+            <summary>
+            Function called when performing a right click on the button.
+            </summary>
+        </member>
+    </members>
+</doc>

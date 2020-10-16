@@ -52,7 +52,7 @@ namespace CommandsPlugin
         /// Called once, and before launching the command panel. This is the only time you can
         /// create buttons.
         /// </summary>
-        public abstract void OnLoad();
+        public abstract void OnLoad(string pluginFolder);
 
         #endregion Public Methods
     }

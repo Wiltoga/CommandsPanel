@@ -46,7 +46,15 @@ namespace CommandsPannel
                 plugin.SavedStrings = App.Data.PluginData[plugin.ID].Strings;
                 plugin.SavedInts = App.Data.PluginData[plugin.ID].Ints;
                 plugin.SavedBools = App.Data.PluginData[plugin.ID].Bools;
-                plugin.OnLoad();
+                try
+                {
+                    plugin.OnLoad(System.IO.Path.Combine(Data.WorkingDir, "plugins"));
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(this, e.ToString(), e.Message, MessageBoxButton.OK, MessageBoxImage.Error);
+                    continue;
+                }
                 foreach (var item in plugin.ButtonsToAdd)
                 {
                     var current = new Button

@@ -6,6 +6,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <OutputPath></OutputPath>
+    <DocumentationFile>C:\Users\natha\source\repos\WildGoat07\CommandsPannel\CommandsPlugin\CommandsPlugin.xml</DocumentationFile>
   </PropertyGroup>
 
 </Project>
